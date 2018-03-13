@@ -1,0 +1,52 @@
+<div class="header">
+	<nav class="navbar navbar-default" style="border:0;">
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<div class="pull-left margin-left">
+				<a class="navbar-brand ml0" href="javascript:void(0);">
+				<h4>{{config.WEB_NAME}}</h3>
+				</a>
+			</div>
+			<div class="pull-left" style="margin:15px 0 0 35px;" >
+				<a href="#" class="text-muted" role="button" id="click-menu-btn" style="display: inline-block;"><i class="glyphicon glyphicon glyphicon-list" style="font-size:18px;"></i></a>
+			</div>
+		</div>
+		<ul class="nav navbar-nav navbar-right" style="margin-right:-1px;">
+			<li class="mr10">
+				<a href="#" id="sys-notification" class="dropdown-toggle text-center lh30 mt10 br50 mb10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-bell"></i><span class="badge vt pa">5</span></a>
+					<ul class="dropdown-menu">
+					<li><a href="#">xxx申请预约了某某设备1</a></li>
+					<li><a href="#">yyy申请预约了某某设备2</a></li>
+					<li><a href="#">yyy申请预约了某某设备3</a></li>
+					<li><a href="#">yyy申请预约了某某设备3</a></li>
+					<li><a href="#">yyy申请预约了某某设备3</a></li>
+					<li><a href="#">yyy申请预约了某某设备3</a></li>
+					<li><a href="#">yyy申请预约了某某设备3</a></li>
+					<li><a href="#">yyy申请预约了某某设备3</a></li>
+					<li><a href="#">yyy申请预约了某某设备3</a></li>
+					<li role="separator" class="divider"></li>
+					<li class="text-center"><a href="#">查看更多借用信息</a></li>
+				</ul>
+			</li>
+			<li class="ml10">
+				<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top:10px;padding-bottom:10px;">
+				<!--{{#if user.head_pic}}
+					<img src="{{user.head_pic}}" class="img-circle" width="30" height="30">
+				{{else}}
+					<img src="/img/1.jpg" class="img-circle" width="30" height="30">
+				{{/if}}-->
+				{{#unless user.head_pic}}
+					<img src="/img/1.jpg" class="img-circle" width="30" height="30">
+				{{else}}
+					<img src="{{user.head_pic}}" class="img-circle" width="30" height="30">
+				{{/unless}}
+				<span class="ml5">{{user.username}}</span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#"><i class="glyphicon glyphicon-user mr10"></i>{{user.username}}</a></li>
+					<li><a id="logout" href="javascript:void(0);"><i class="glyphicon glyphicon-off mr10"></i>退出</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>

@@ -1,0 +1,125 @@
+<style>
+	.person-top{
+		height:160px;
+		background:url(/images/bg.jpg) no-repeat center;
+	}
+	a{
+		color:#000;
+	}
+</style>
+<div class="container maxW640 bgw mauto h box-sizing-border borderw">
+	{{> header}}
+	<!--主体内容 start-->
+	<section class="content mt45 mb50 ohidden" id="content">
+		<section class="person-content bg-gray">
+			<div class="person-top">
+				<div class="shadow displayf flexdirec altc h jscc">
+					<img class="br50" :src="info.head_pic"  alt="head" width="50" height="50" />
+					<p class="colorf mt10 mb10">${info.name}</p>
+					<p><span class="br10 bg-yellow pt5 pb5 pr15 pl15 colorf">信用分：${info.points}</span></p>
+				</div>
+			</div>
+			<div class="person-main">
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">姓名</span><span class="fz16">${info.name}<i class="ml5 iconfont icon-arrow1 hide"></i></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">学号/工号</span><span class="fz16">${info.account}<i class="ml5 iconfont icon-arrow1 hide"></i></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">用户类型</span><span class="fz16" v-if="info.type==1">学生<i class="ml5 iconfont icon-arrow1 hide"></i></span><span class="fz16" v-else-if="info.type==2">教师<i class="ml5 iconfont icon-arrow1 hide"></i></span><span class="fz16" v-else>未知<i class="ml5 iconfont icon-arrow1 hide"></i></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">性别</span><a class="fz16" href="person_edit">${person_data.sex}<i class="ml5 iconfont icon-arrow1"></i></a>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">所读专业</span><a class="fz16" href="person_edit">${person_data.major}<i class="ml5 iconfont icon-arrow1"></i></a>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">所在年级</span><a class="fz16" href="person_edit">${person_data.grade}<i class="ml5 iconfont icon-arrow1"></i></a>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray mb30 bgw">
+					<span class="fz16">所在学院</span><a class="fz16" href="person_edit">${person_data.academy}<i class="ml5 iconfont icon-arrow1"></i></a>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">绑定手机号</span><a class="fz16" href="person_edit">${person_data.tel}<i class="ml5 iconfont icon-arrow1"></i></a>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">电子邮箱</span><a class="fz16" href="person_edit">${person_data.email}<i class="ml5 iconfont icon-arrow1"></i></a>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">身份证号码</span><a class="fz16" href="person_edit">${person_data.idcard}<i class="ml5 iconfont icon-arrow1"></i></a>
+				</p>
+			</div>
+			<div class="person-bottom mt30">
+				<a class="displayb h40 bg-yellow colorf tc lh40 fz15 letters5" id="login-out" href="javascript:void(0);" @touchstart="logout">退出登录</a>
+			</div>
+		</section>
+		{{> nav}}
+	</section>
+	<!--主体内容 end-->
+</div>
+<script type="text/javascript">
+	$(function(){
+		let vm = new Vue({
+			el:"#content",
+			// 更改Vue默认的插入纯文本的分隔符\{{}}，因为与后端handlebars的模板引擎的分隔符冲突了
+			delimiters:['${','}'],//改成ES6的字符串模板
+			data(){
+				return {
+					info:null,
+					person_data:{
+						sex:"",
+						major:"",
+						grade:"",
+						academy:"",
+						tel:"",
+						email:"",
+						idcard:"",
+					}
+				}
+			},
+			methods:{
+				// 登出操作
+				logout(){
+					layer.open({
+						content: '亲，你真的要退出吗?',
+						shadeClose:false,
+						btn: ['确认', '取消'],
+						skin: 'footer',
+						yes(index){
+							window.location.href = "logout";
+						}
+					});
+				},
+				// 个人信息详情
+				person_info(){
+					// axios模块请求数据
+					axios.get('../data/person').then(res=>{
+						console.log(res);
+						this.info = res.data.data;
+						// 处理数据
+						for(let key in this.person_data){
+							this.person_data[key] = res.data.data[key];
+							if(key == "sex"){
+								if(res.data.data[key]==1){
+									this.person_data[key] = "男";
+								}else if(res.data.data[key]==2){
+									this.person_data[key] = "女";
+								}else{
+									this.person_data[key] = "未知";
+								}
+							};
+						};
+					}).catch(error=>{
+						console.log(error);
+					});
+				}
+			},
+			// 钩子函数，vue实例初始化并且相关程序在内存中编译完成，可以用于执行一些函数
+			mounted(){
+				this.person_info();
+			}
+		})
+	});
+</script>

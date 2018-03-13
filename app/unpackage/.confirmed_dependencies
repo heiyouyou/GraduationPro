@@ -1,0 +1,58 @@
+{
+	"index.html": {
+		"resources": [
+			"images/2.jpg",
+			"css/base.css",
+			"fonts/iconfont.css",
+			"js/common.js",
+			"js/extends/layer_mobile/layer.js",
+			"js/extends/vue.js",
+			"css/common.css",
+			"images/1.jpg",
+			"js/extends/layer_mobile/need/layer.css",
+			"fonts/iconfont.woff",
+			"js/extends/jquery.min.js",
+			"reservation.html",
+			"person.html",
+			"login.html"
+		],
+		"refer": [
+			"reservation.html",
+			"person.html",
+			"login.html"
+		]
+	},
+	"reservation.html": {
+		"resources": [
+			"index.html",
+			"login.html",
+			"person.html"
+		],
+		"refer": [
+			"index.html",
+			"login.html",
+			"person.html"
+		]
+	},
+	"person.html": {
+		"resources": [
+			"images/me.jpg",
+			"images/bg.jpg",
+			"login.html",
+			"reservation.html"
+		],
+		"refer": [
+			"login.html",
+			"reservation.html"
+		]
+	},
+	"login.html": {
+		"resources": [
+			"images/logo.jpg",
+			"index.html"
+		],
+		"refer": [
+			"index.html"
+		]
+	}
+}

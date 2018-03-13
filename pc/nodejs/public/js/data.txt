@@ -1,0 +1,6 @@
+{
+	"status":{"code":200,"message":"请求成功"},
+	"aaData":[{"id":1,"name":"高频电子","specification":"xxrew1","price":23,"academy":"22304","intime":"2015/12/12 22:34:22","status":"0","type":"212","life":"2","synopsis":"这是电子","photo":"ssss","brand":"三星","brand_type":"S27E390H"},{"id":2,"name":"高频电子","specification":"xxrew1","price":23,"academy":"22304","intime":"2015/12/12 22:34:22","status":"0","type":"212","life":"2","synopsis":"这是电子","photo":"ssss","brand":"三星","brand_type":"S27E390H"},{"id":3,"name":"高频电子","specification":"xxrew1","price":23,"academy":"22304","intime":"2015/12/12 22:34:22","status":"0","type":"212","life":"2","synopsis":"这是电子","photo":"ssss","brand":"三星","brand_type":"S27E390H"},{"id":4,"name":"高频电子","specification":"xxrew1","price":23,"academy":"22304","intime":"2015/12/12 22:34:22","status":"0","type":"212","life":"2","synopsis":"这是电子","photo":"ssss","brand":"三星","brand_type":"S27E390H"},{"id":5,"name":"高频电子","specification":"xxrew1","price":23,"academy":"22304","intime":"2015/12/12 22:34:22","status":"0","type":"212","life":"2","synopsis":"这是电子","photo":"ssss","brand":"三星","brand_type":"S27E390H"}],"iTotalRecords":5,
+	"iTotalDisplayRecords":5,
+	"sEcho":1
+}

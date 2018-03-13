@@ -1,0 +1,174 @@
+<!--修改模态窗 start-->
+<div class="modal fade" id="editBorrowModal" tabindex="-1" role="dialog" aria-labelledby="editBorrowModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title text-center"><span>修改借用信息</span><small>(注:带<span class="require">*</span>为必填字段)</small></h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form" id="editBorrowForm">
+					<div class="form-group hide">
+						<label class="col-sm-2 control-label pr0" for="edit-borrow-id">借出ID<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-borrow-id" placeholder="借出ID" autocomplete="off" readonly>
+						</div>
+					</div>
+					<div class="form-group hide">
+						<label class="col-sm-2 control-label pr0" for="edit-borrow-eqid">设备编号<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-borrow-eqid" placeholder="设备编号" autocomplete="off" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-borrow-outtime">借出时间<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-borrow-outtime" placeholder="借出时间" autocomplete="off" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-borrow-endtime">到期时间<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-borrow-endtime" placeholder="到期时间" autocomplete="off" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-borrow-backtime">归还时间<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-borrow-backtime" placeholder="归还时间" autocomplete="off" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-borrow-status">审批状态<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<select class="form-control" id="edit-borrow-status">
+						<option value='1'>未审批</option>
+						<option value='2'>已审批</option>
+					</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-borrow-backstatus">归还状态<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<select class="form-control" id="edit-borrow-backstatus">
+								<option value='0'>未归还</option>
+								<option value='1'>已归还</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group hide">
+						<label class="col-sm-2 control-label pr0" for="edit-borrow-isoverdue">逾期状态<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<select class="form-control" id="edit-borrow-isoverdue">
+						<option value='1'>未过期</option>
+						<option value='2'>已过期</option>
+					</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-borrow-money">罚款数目<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-borrow-money" placeholder="罚款数目" autocomplete="off">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary" id="edit-borrow-btn">修改</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 修改模态窗 start -->
+<!--header start-->
+{{> header}}
+<!--end header-->
+<!--left-menu start-->
+{{> menu}}
+<!--end left-menu-->
+<!--content-page start-->
+<div class="content">
+	<div class="container w">
+		<div class="row tabItems mr0 ml0">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active" id="borrow-message-tab"><a class="fw600" href="#borrow-message" role="tab" data-toggle="tab" aria-expanded="true">借用管理</a></li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="borrow-message">
+					<div class="row border-bottom-ddd pb10">
+						<div class="col-md-11">
+							<form class="form-inline search-form" id="borrow-form" role="form">
+								<div class="form-group">
+									<label for="search-equip-id">设备编号&nbsp;:&nbsp;</label><input type="text" class="form-control" id="search-equip-id"
+									 name="eqid" placeholder="请输入设备编号">
+								</div>
+								<div class="form-group">
+									<label for="search-user-id">用户编号&nbsp;:&nbsp;</label><input type="text" class="form-control" id="search-user-id"
+									 name="uid" placeholder="请输入用户编号">
+								</div>
+								<div class="form-group hide">
+									<label for="search-user-account">用户账号&nbsp;:&nbsp;</label><input type="text" class="form-control" id="search-user-account"
+									 name="account" placeholder="请输入用户账号">
+								</div>
+								<div class="form-group">
+									<label for="search-equip-outtime">借出日期&nbsp;:&nbsp;</label><input type="text" class="form-control" id="search-equip-outtime"
+									 name="outtime" placeholder="请输入借出日期" readonly>
+								</div>
+								<div class="form-group">
+									<label for="search-equip-endtime">到期日期&nbsp;:&nbsp;</label><input type="text" class="form-control" id="search-equip-endtime"
+									 name="endtime" placeholder="请输入到期日期" readonly>
+								</div>
+								<div class="form-group">
+									<label for="search-equip-backtime">归还日期&nbsp;:&nbsp;</label><input type="text" class="form-control" id="search-equip-backtime"
+									 name="backtime" placeholder="请输入归还日期" readonly>
+								</div>
+								<div class="form-group">
+									<label>审批状态&nbsp;:&nbsp;</label>
+									<select class="form-control" id="search-status" name="status">
+										<option value="">请选择</option>
+										<option value="1">未审批</option>
+										<option value="2">已审批</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>逾期状态&nbsp;:&nbsp;</label>
+									<select class="form-control" id="search-isoverdue" name="isoverdue">
+										<option value="">请选择</option>
+										<option value="1">未过期</option>
+										<option value="2">已过期</option>
+									</select>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-1 text-right pr0">
+							<a id="search-btn" class="btn btn-primary mb15">
+								搜索
+							</a>
+							<!--<a id="add-btn" class="btn btn-primary mb15" data-toggle="modal" data-target="#addEquipModal">
+								添加
+							</a>-->
+							<a class="btn btn-primary dropdown-toggle hide" data-toggle="dropdown">导出</a>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+								<li class="text-center"><a href="javascript:void(0);" target="_blank" id="ExportEx">导出Excel</a></li>
+								<li class="text-center"><a href="javascript:void(0);" target="_blank" id="ExportCsv">导出CSV</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="card-box">
+						<table id="borrow_table" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end content-page-->
+
+<!--本页面的js文件-->
+<script type="text/javascript" src="/js/borrow-manage.js"></script>
+<script type="text/javascript">
+
+</script>

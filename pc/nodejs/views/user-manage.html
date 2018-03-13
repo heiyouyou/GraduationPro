@@ -1,0 +1,471 @@
+<!-- 添加管理员 start -->
+<div class="modal fade" id="addManagerModal" tabindex="-1" role="dialog" aria-labelledby="addManagerModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title text-center"><span>添加管理员</span><small>(注:带<span class="require">*</span>为必填字段)</small></h4>
+			</div>
+			<div class="modal-body">
+			<form class="form-horizontal" role="form" id="addManagerForm">
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-manager-name">管理员名称<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-manager-name" name="username" placeholder="管理员名称" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-manager-password">管理员密码<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-manager-password" name="password" placeholder="管理员密码" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-manager-phone">手机号<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-manager-phone" name="phone" placeholder="手机号" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-manager-type">管理员类型<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<select class="form-control" id="add-manager-type" name="type">
+							<option value='0'>请选择</option>
+							<option value='1'>超级管理员</option>
+							<option value='2'>普通管理员</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-manager-photo">管理员头像</label>
+					<div class="col-sm-8">
+						<input type="file" accept="image/*" id="add-manager-photo" name="head_pic" >
+					</div>
+				</div>
+			</form>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			<button type="button" class="btn btn-primary" id="add-manager-btn">添加</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 添加管理员 end -->
+<!--修改管理员信息 start-->
+<div class="modal fade" id="editManagerModal" tabindex="-1" role="dialog" aria-labelledby="editManagerModal" aria-hidden="true">
+	<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title text-center"><span>修改管理员信息</span><small>(注:带<span class="require">*</span>为必填字段)</small></h4>
+		</div>
+		<div class="modal-body">
+		<form class="form-horizontal" role="form" id="editManagerForm">
+			<div class="form-group">
+				<label class="col-sm-2 control-label pr0" for="edit-manager-id">管理员编号<span class="require vm">*</span></label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="edit-manager-id" name="id" placeholder="管理员编号" aiautocomplete="off" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label pr0" for="edit-manager-name">管理员名称<span class="require vm">*</span></label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="edit-manager-name" name="username" placeholder="管理员名称" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label pr0" for="edit-manager-password">管理员密码<span class="require vm">*</span></label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="edit-manager-password" name="password" placeholder="管理员密码" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label pr0" for="edit-manager-phone">手机号<span class="require vm">*</span></label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="edit-manager-phone" name="phone" placeholder="手机号" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label pr0" for="edit-manager-type">管理员类型<span class="require vm">*</span></label>
+				<div class="col-sm-8">
+					<select class="form-control" id="edit-manager-type" name="type">
+						<option value=''>请选择</option>
+						<option value='1'>超级管理员</option>
+						<option value='2'>普通管理员</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label pr0" for="edit-manager-photo">管理员头像</label>
+				<div class="col-sm-8">
+					<input type="file" accept="image/*" id="edit-manager-photo" name="head_pic">
+				</div>
+			</div>
+		</form>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		<button type="button" class="btn btn-primary" id="edit-manager-btn">修改</button>
+		</div>
+	</div>
+	</div>
+</div>
+<!-- 修改管理员信息 end -->
+
+<!-- 添加普通用户 start -->
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title text-center"><span>添加用户</span><small>(注:带<span class="require">*</span>为必填字段)</small></h4>
+			</div>
+			<div class="modal-body">
+			<form class="form-horizontal" role="form" id="addUserForm">
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-account">用户账号<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-user-account" name="account" placeholder="用户账号" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-name">用户姓名<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-user-name" name="name" placeholder="用户姓名" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-password">用户密码<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-user-password" name="password" placeholder="用户密码" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-phone">手机号<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-user-phone" name="tel" placeholder="手机号" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-email">邮箱<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-user-email" name="email" placeholder="邮箱" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-sex">用户性别<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<select class="form-control" id="add-user-sex" name="sex">
+							<option value='1'>男</option>
+							<option value='2'>女</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-type">用户类型<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<select class="form-control" id="add-user-type" name="type">
+							<option value='1'>学生</option>
+							<option value='2'>教师</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-idcard">身份证号码<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-user-idcard" name="idcard" placeholder="身份证号码" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-academy">所在院系<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-user-academy" name="academy" placeholder="所在院系" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-grade">所在年级<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<select class="form-control" id="add-user-grade" name="grade">
+							<option value='大一'>大一</option>
+							<option value='大二'>大二</option>
+							<option value='大三'>大三</option>
+							<option value='大四'>大四</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-major">专业<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="add-user-major" name="major" placeholder="专业" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="add-user-photo">用户头像</label>
+					<div class="col-sm-8">
+						<input type="file" accept="image/*" id="add-user-photo" name="head_pic" >
+					</div>
+				</div>
+			</form>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			<button type="button" class="btn btn-primary" id="add-user-btn">添加</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 添加普通用户 end -->
+<!--修改普通用户信息 start-->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editManagerModal" aria-hidden="true">
+	<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title text-center"><span>修改普通用户信息</span><small>(注:带<span class="require">*</span>为必填字段)</small></h4>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal" role="form" id="editUserForm">
+				<div class="form-group hide">
+					<label class="col-sm-2 control-label pr0" for="edit-user-id">用户ID<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="edit-user-id" name="id" placeholder="用户ID" autocomplete="off" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-account">用户账号<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="edit-user-account" name="account" placeholder="用户账号" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-name">用户名称<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="edit-user-name" name="name" placeholder="用户名称" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-password">用户密码<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="edit-user-password" name="password" placeholder="用户密码" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-phone">手机号<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="edit-user-phone" name="tel" placeholder="手机号" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-email">邮箱<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="edit-user-email" name="email" placeholder="邮箱" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-idcard">身份证号码<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="edit-user-idcard" name="idcard" placeholder="身份证号码" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-academy">所在院系<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="edit-user-academy" name="academy" placeholder="所在院系" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-grade">所在年级<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<select class="form-control" id="edit-user-grade" name="grade">
+							<option value='大一'>大一</option>
+							<option value='大二'>大二</option>
+							<option value='大三'>大三</option>
+							<option value='大四'>大四</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-major">专业<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="edit-user-major" name="major" placeholder="专业" autocomplete="off">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-sex">用户性别<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<select class="form-control" id="edit-user-sex" name="sex">
+							<option value='1'>男</option>
+							<option value='2'>女</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-type">用户类型<span class="require vm">*</span></label>
+					<div class="col-sm-8">
+						<select class="form-control" id="edit-user-type" name="type">
+							<option value='1'>学生</option>
+							<option value='2'>教师</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label pr0" for="edit-user-photo">用户头像</label>
+					<div class="col-sm-8">
+						<input type="file" accept="image/*" id="edit-user-photo" name="head_pic">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		<button type="button" class="btn btn-primary" id="edit-user-btn">修改</button>
+		</div>
+	</div>
+	</div>
+</div>
+<!-- 修改普通用户信息 end -->
+<!--header start-->
+{{> header}}
+<!--end header-->
+<!--left-menu start-->
+{{> menu}}
+<!--end left-menu-->	
+<!--content-page start-->
+<div class="content">
+	<div class="container w">
+		<div class="row tabItems mr0 ml0">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active" id="manager-tab"><a class="fw600" href="#manager-message" role="tab" data-toggle="tab" aria-expanded="true">管理员</a></li>
+				<li role="presentation" id="user-tab"><a class="fw600" href="#user-message" role="tab" data-toggle="tab" aria-expanded="false">普通用户</a></li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="manager-message">
+					<div class="row border-bottom-ddd pb10">
+						<div class="col-md-10">
+							<form class="form-inline search-form" id="manager-form" role="form">
+								<div class="form-group">
+									<label for="manager-id">编号&nbsp;:&nbsp;</label><input type="text" class="form-control" id="manager-id" name="id" placeholder="请输入管理员编号">
+								</div>
+								<div class="form-group">
+									<label for="manager-name">名称&nbsp;:&nbsp;</label><input type="text" class="form-control" id="manager-name" name="username" placeholder="请输入管理员名称">
+								</div>
+								<div class="form-group">
+									<label for="manager-phone">手机号&nbsp;:&nbsp;</label><input type="text" class="form-control" id="manager-phone" name="phone" placeholder="管理员手机号">
+								</div>
+								<div class="form-group">
+									<label>类型&nbsp;:&nbsp;</label>
+									<select class="form-control" id="manager-type" name="type">
+										<option value="">请选择</option>
+										<option value="1">超级管理员</option>
+										<option value="2">普通管理员</option>
+									</select>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-2 text-right pr0">
+							<a id="search-manager-btn"  class="btn btn-primary mb15">
+								搜索
+							</a>
+							<a class="btn btn-primary mb15" data-toggle="modal" data-target="#addManagerModal">
+								添加
+							</a>
+							<a class="btn btn-primary dropdown-toggle hide" data-toggle="dropdown">导出</a>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+								<li class="text-center"><a href="javascript:void(0);" target="_blank" id="ExportEx">导出Excel</a></li>
+								<li class="text-center"><a href="javascript:void(0);" target="_blank" id="ExportCsv">导出CSV</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="card-box">
+						<table id="manager_table" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"></table>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="user-message">
+					<div class="row border-bottom-ddd pb10">
+						<div class="col-md-11">
+							<form class="form-inline search-form" id="user-form" role="form">
+								<div class="form-group">
+									<label for="user-account">用户账号&nbsp;:&nbsp;</label><input type="text" class="form-control" id="user-account" name="account" placeholder="请输入用户账号">
+								</div>
+								<div class="form-group">
+									<label for="user-name">用户姓名&nbsp;:&nbsp;</label><input type="text" class="form-control" id="user-name" name="name" placeholder="请输入用户姓名">
+								</div>
+								<div class="form-group">
+									<label for="user-phone">手机号&nbsp;:&nbsp;</label><input type="text" class="form-control" id="user-phone" name="tel" placeholder="请输入用户手机号">
+								</div>
+								<div class="form-group">
+									<label for="user-email">邮箱&nbsp;:&nbsp;</label><input type="text" class="form-control" id="user-email" name="email" placeholder="请输入用户邮箱">
+								</div>
+								<div class="form-group">
+									<label for="user-idcard">身份证号码&nbsp;:&nbsp;</label><input type="text" class="form-control" id="user-idcard" name="idcard" placeholder="请输入身份证号码">
+								</div>
+								<div class="form-group">
+									<label for="user-academy">院系&nbsp;:&nbsp;</label><input type="text" class="form-control" id="user-academy" name="academy" placeholder="请输入院系">
+								</div>
+								<div class="form-group">
+									<label for="user-grade">年级&nbsp;:&nbsp;</label>
+									<select class="form-control" id="user-grade" name="grade">
+										<option value="">请选择年级</option>
+										<option value="大一">大一</option>
+										<option value="大二">大二</option>
+										<option value="大三">大三</option>
+										<option value="大四">大四</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="user-major">专业&nbsp;:&nbsp;</label><input type="text" class="form-control" id="user-major" name="major" placeholder="请输入专业">
+								</div>
+								<div class="form-group">
+									<label>性别&nbsp;:&nbsp;</label>
+									<select class="form-control" id="user-sex" name="sex">
+										<option value="">请选择</option>
+										<option value="1">男</option>
+										<option value="2">女</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>用户类型&nbsp;:&nbsp;</label>
+									<select class="form-control" id="user-type" name="type">
+										<option value="">请选择</option>
+										<option value="1">学生</option>
+										<option value="2">教师</option>
+									</select>
+								</div>
+							</form>
+						</div>
+						<div class="col-md-1 text-right pr0">
+							<a id="search-user-btn"  class="btn btn-primary mb15">
+								搜索
+							</a>
+							<a id="add-user-btn" class="btn btn-primary mb15" data-toggle="modal" data-target="#addUserModal">
+								添加
+							</a>
+							<a class="btn btn-primary dropdown-toggle hide" data-toggle="dropdown">导出</a>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+								<li class="text-center"><a href="javascript:void(0);" target="_blank" id="ExportEx">导出Excel</a></li>
+								<li class="text-center"><a href="javascript:void(0);" target="_blank" id="ExportCsv">导出CSV</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="card-box">
+						<table id="user_table" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end content-page-->
+
+<!--本页面js文件-->
+<script type="text/javascript" src="/js/user-manage.js"></script>
+<script type="text/javascript">
+	$(function(){
+
+	});
+</script>
+

@@ -1,0 +1,293 @@
+<!-- 添加设备模态窗 start -->
+<div class="modal fade" id="addEquipModal" tabindex="-1" role="dialog" aria-labelledby="addEquipModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title text-center"><span>添加设备</span><small>(注:带<span class="require">*</span>为必填字段)</small></h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form" id="addEquipForm" enctype="multipart/form-data">
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-id">设备编号<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="add-equip-id" name="id" placeholder="设备编号" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-name">设备名称<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="add-equip-name" name="name" placeholder="设备名称" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-specification">设备规格<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="add-equip-specification" placeholder="设备规格" name="specification" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-price">设备单价<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="add-equip-price" placeholder="设备单价" name="price" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-type">设备类型<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<select class="form-control" id="add-equip-type" name="type">
+							<option value='000'>请输入设备类型</option>
+							<option value='001'>三星</option>
+							<option value='002'>华为</option>
+							<option value='003'>LG</option>
+							<option value='004'>胜利</option>
+							<option value='005'>长城</option>
+						</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-life">使用年限<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="number" class="form-control" id="add-equip-life" name="life" placeholder="设备年限" autocomplete="off" min="0">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-status">设备状态<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<select class="form-control" id="add-equip-status" name="status">
+							<option value='0'>在库</option>
+							<option value='1'>借出</option>
+							<option value='2'>预约</option>
+							<option value='3'>损坏</option>
+						</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-intime">入库时间<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="add-equip-intime" name="intime" placeholder="入库时间" autocomplete="off" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-academy">所属实验室<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="add-equip-academy" name="academy" placeholder="所属实验室" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-photo">设备图片<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="file" accept="image/*" id="add-equip-photo" name="photo">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="add-equip-synopsis">设备简介<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<textarea name="synopsis" id="add-equip-synopsis" class="form-control" rows="5" placeholder="设备简介不能超过100字....." maxlength="100"></textarea>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary" id="add-equip-btn">添加</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 添加设备模态窗 end -->
+<!--修改设备模态窗 start-->
+<div class="modal fade" id="editEquipModal" tabindex="-1" role="dialog" aria-labelledby="editEquipModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title text-center"><span>修改设备信息</span><small>(注:带<span class="require">*</span>为必填字段)</small></h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" role="form" id="editEquipForm">
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-id">设备编号<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-equip-id" name="id" placeholder="设备编号" autocomplete="off" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-name">设备名称<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-equip-name" name="name" placeholder="设备名称" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-specification">设备规格<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-equip-specification" name="specification" placeholder="设备规格" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-price">设备单价<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-equip-price" name="price" placeholder="设备单价" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-type">设备类型<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<select class="form-control" id="edit-equip-type" name="type" >
+								<option value=''>请选择设备类型</option>
+								<option value='001'>三星</option>
+								<option value='002'>华为</option>
+								<option value='003'>LG</option>
+								<option value='004'>胜利</option>
+								<option value='005'>长城</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-life">使用年限<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="number" class="form-control" id="edit-equip-life" name="life" placeholder="设备年限" autocomplete="off" min="0">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-status">设备状态<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<select class="form-control" id="edit-equip-status" name="status">
+								<option value='0'>在库</option>
+								<option value='1'>借出</option>
+								<option value='2'>预约</option>
+								<option value='3'>损坏</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-intime">入库时间<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-equip-intime" name="intime" placeholder="入库时间" autocomplete="off" readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-academy">所属实验室<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="edit-equip-academy" name="academy" placeholder="所属实验室" autocomplete="off">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-photo">设备图片<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<input type="file" accept="image/*" id="edit-equip-photo" name="photo">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label pr0" for="edit-equip-synopsis">设备简介<span class="require vm">*</span></label>
+						<div class="col-sm-8">
+							<textarea name="synopsis" id="edit-equip-synopsis" class="form-control" rows="5" placeholder="设备简介不能超过100字....." maxlength="100"></textarea>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary" id="edit-equip-btn">修改</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 修改设备模态窗 start -->
+<!--header start-->
+{{> header}}
+<!--end header-->
+<!--left-menu start-->
+{{> menu}}
+<!--end left-menu-->
+<!--content-page start-->
+<div class="content">
+	<div class="container w">
+		<div class="row tabItems mr0 ml0">
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active" id="equipment-message-tab"><a class="fw600" href="#equipment-message" role="tab" data-toggle="tab" aria-expanded="true">设备信息</a></li>
+				<li role="presentation" id="equipment-service-tab" class="hide"><a class="fw600" href="#equipment-service" role="tab" data-toggle="tab" aria-expanded="false">设备维修</a></li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="equipment-message">
+					<div class="row border-bottom-ddd pb10">
+						<div class="col-md-11">
+							<form class="form-inline search-form" id="search-form" role="form">
+								<div class="form-group">
+									<label for="equip-id">设备编号&nbsp;:&nbsp;</label><input type="text" class="form-control" id="equip-id" name="id" placeholder="请输入设备编号">
+								</div>
+								<div class="form-group">
+									<label for="equip-name">设备名称&nbsp;:&nbsp;</label><input type="text" class="form-control" id="equip-name" name="name" placeholder="请输入设备名称">
+								</div>
+								<div class="form-group">
+									<label for="equip-start-time">时间区间&nbsp;:&nbsp;</label><input type="text" class="form-control" id="equip-start-time" name="start-time" placeholder="请输入开始时间"
+									 readonly>
+									 <input type="text" class="form-control" id="equip-last-time" name="last-time" placeholder="请输入结束时间"
+									 readonly>
+								</div>
+								<div class="form-group">
+									<label for="equip-type">设备类型&nbsp;:&nbsp;</label>
+									<select class="form-control" id="equip-type" name="type">
+										<option value=''>请输入设备类型</option>
+										<option value='001'>三星</option>
+										<option value='002'>华为</option>
+										<option value='003'>LG</option>
+										<option value='004'>胜利</option>
+										<option value='005'>长城</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="equip-brand">使用年限&nbsp;:&nbsp;</label><input type="number" class="form-control" id="equip-life" name="life" placeholder="请输入使用年限" min="0">
+								</div>
+								<div class="form-group">
+									<label>设备状态&nbsp;:&nbsp;</label>
+									<select class="form-control" id="equip-status" name="status">
+										<option value="">请选择</option>
+										<option value="0">在库</option>
+										<option value="1">借出</option>
+										<option value="2">预约</option>
+										<option value="3">损坏</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="equip-place">所属实验室&nbsp;:&nbsp;</label><input type="text" class="form-control" id="equip-place" name="academy" placeholder="请输入实验室门号">
+								</div>
+							</form>
+						</div>
+						<div class="col-md-1 text-right pr0">
+							<a id="search-equip-btn" class="btn btn-primary mb15">
+								搜索
+							</a>
+							<a id="add-equip-btn" class="btn btn-primary mb15" data-toggle="modal" data-target="#addEquipModal">
+								添加
+							</a>
+							<a class="btn btn-primary dropdown-toggle hide" data-toggle="dropdown">导出</a>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+								<li class="text-center"><a href="javascript:void(0);" target="_blank" id="ExportEx">导出Excel</a></li>
+								<li class="text-center"><a href="javascript:void(0);" target="_blank" id="ExportCsv">导出CSV</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="card-box">
+						<table id="equipment_table" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"></table>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane hide" id="equipment-service">
+					设备维修
+					<div class="card-box">
+						<table id="service_table" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end content-page-->
+
+<!--本页面js文件-->
+<script type="text/javascript" src="/js/equipment-manage.js"></script>
+<script type="text/javascript">
+
+</script>

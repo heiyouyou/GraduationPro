@@ -1,0 +1,61 @@
+<div class="container maxW640 bgw mauto h box-sizing-border borderw">
+	{{> header}}
+	<!--主体内容 start-->
+	<section class="content mt45 mb50 ohidden" id="content">
+		<section>
+			<figure>
+				<img class="w h150 mb10" src="{{data.photo}}" alt="1"/>
+				<figcaption class="displayf flexdirec parl10">
+					<span class="borderb-yellow mb5 lh25">设备名称：{{data.name}}</span>
+					<span class="borderb-yellow mb5 lh25">设备规格：{{data.specification}}</span>
+					<span class="borderb-yellow mb5 lh25">设备类型：{{formatType data.type}}</span>
+					<span class="borderb-yellow mb5 lh25">所属实验室：{{data.academy}}</span>
+					<p class="multi-lineEllipsis3 borderb-yellow lh20 pb5">设备简介：{{data.synopsis}}</p>
+				</figcaption>
+			</figure>
+			<div class="parl10 mt10">
+				<span class="btn">剩余量{{data.last}}</span>
+				<span class="btn">已借出{{data.loan}}</span>
+				<a class="bg-yellow fr colorf add-btn tc" href="javascript:void(0);" @click="add('{{data.name}}')">添加预约+</a>
+			</div>
+		</section>
+		{{> nav}}
+	</section>
+	<!--主体内容 end-->
+</div>
+<script type="text/javascript">
+	$(function(){
+		const vm = new Vue({
+			el:"#content",
+			methods:{
+				add(text){
+					console.log(text);
+					axios.get('../data/reservation/add',{
+							params:{
+								name:text
+							}
+						}
+					).then(res=>{
+						if(res.data.code==200){
+							layer.open({
+								content: res.data.message,
+								skin: 'msg',
+								style:"background:#e1c10c;",
+								time: 2 //2秒后自动关闭
+							});
+						}else{
+							layer.open({
+								content: res.data.message,
+								skin: 'msg',
+								style:"background:#e1c10c;",
+								time: 2 //2秒后自动关闭
+							});
+						}
+					}).catch(error=>{
+						console.log(error);
+					});
+				}
+			}
+		});
+	});
+</script>

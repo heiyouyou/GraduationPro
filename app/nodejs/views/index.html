@@ -1,0 +1,119 @@
+<style>
+	.search-box input {
+		width: 80%;
+	}
+	
+	#search-btn {
+		width: 20%;
+	}
+</style>
+<div class="container maxW640 bgw mauto h box-sizing-border borderw">
+	{{> header}}
+	<!--主体内容 start-->
+	<section class="content mt50 mb50 ohidden" id="content">
+		<div class="search-box border-yellow px maxW640 w">
+			<input class="borderNone h30 t1_5" type="text" placeholder="输入关键字搜索..." v-model="keywords" /><a class="bg-yellow fr colorf lh30 tc fz15 h30"
+			 id="search-btn" href="javascript:void(0);" @touchstart="list(1)">搜索</a>
+		</div>
+		<div class="content-box mt40">
+			<ul>
+				<li class="borderb-yellow patrbl5" v-for="(v,i) in list_data">
+					<figure class="displayf">
+						<a class="flex1" :href="link+v.name"><img class="w h" :src="v.photo" :alt="i" /></a>
+						<figcaption class="ml5 flex3">
+							<p>名称：<span class="text-yellow">${v.name}</span></p>
+							<p v-if="v.type==001">规格：${v.specification}，类型：三星</p>
+							<p v-else-if="v.type==002">规格：${v.specification}，类型：华为</p>
+							<p v-else-if="v.type==003">规格：${v.specification}，类型：LG</p>
+							<p v-else-if="v.type==004">规格：${v.specification}，类型：胜利</p>
+							<p v-else-if="v.type==005">规格：${v.specification}，类型：长城</p>
+							<p v-else>规格：${v.specification}，类型：未知</p>
+							<p class="multi-lineEllipsis mb5"><a class="text-gray1" href="javascript:void(0);">${v.synopsis}</a></p>
+							<span class="btn">剩余量${v.last}</span>
+							<span class="btn">已借出${v.loan}</span>
+						</figcaption>
+					</figure>
+				</li>
+			</ul>
+		</div>
+		<div class="bg-yellow"><a class="displayb tc lh35 colorf" id="more-btn" href="javascript:void(0);" @touchstart="list(0)">${moreText}</a></div>
+		{{> nav}}
+	</section>
+	<!--主体内容 end-->
+</div>
+<script type="text/javascript">
+	$(function () {
+		let vm = new Vue({
+			// router,
+			delimiters: ['${', '}'],//改成ES6的字符串模板
+			data:{
+				link:"details?name=",
+				//查询的关键词
+				keywords: "",
+				// 分页参数
+				start: 0,
+				length: 4,
+				// 列表数据
+				list_data: [],
+				// 加载更多查询的数据
+				mark:0,
+				data_length: 0,
+				// 更多加载判断
+				show: true,
+				moreText:"加载更多"
+			},
+			methods: {
+				//设备列表查询
+				list(flag) {
+					let params = null;
+					// flag等于1表示进行关键字搜索查询,进行数据清空,和相关变量重置
+					if(flag==1){
+						this.mark = 1;
+						this.list_data = [];
+						this.start = 0;
+						this.show = true;
+						this.moreText = "加载更多";
+						params = {
+							start: this.start,
+							length: this.length,
+							keywords:this.keywords
+						};
+					}else{
+						params = this.mark != 1 ? {
+							start: this.start,
+							length: this.length,
+						}:{
+							start: this.start,
+							length: this.length,
+							keywords:this.keywords
+						};
+					}
+					// 无数据进行阻止请求
+					if(!this.show){
+						return;
+					}
+					axios.post('../data/device/list',params).then((res) => {
+						this.data_length = res.data.data.length;
+						// 如果请求的数据为空或者如果加载过来的数据少于要求的，则进行显示无数据 
+						if (this.data_length == 0||this.data_length<this.length) {
+							this.show = false;
+							this.moreText = "无数据可以查看";
+						}else{
+							this.show = true;
+							this.moreText = "加载更多";
+						}
+						this.list_data = this.list_data.concat(res.data.data);
+						this.start += this.length;
+						console.log("下次请求的起始位置:"+this.start);
+					}).catch((error) => {
+						console.log(error);
+					});
+				}
+			},
+			mounted() {
+				this.list();
+			}
+		}).$mount("#content");
+	});
+
+</script>

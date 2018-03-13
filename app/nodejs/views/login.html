@@ -1,0 +1,72 @@
+<style>
+	.login-box input{
+		border:none;
+		border-bottom:2px solid #e1c10c;
+		color:#e1c10c;
+		padding:4px 0;
+		width:200px;
+	}
+	#login-btn{
+		width:200px;
+	}
+	#find-pw:hover{
+		color:#e1c10c;
+	}
+</style>
+<div class="container maxW640 bgw mauto h displayf altc jscc">
+	<section class="login-box displayf flexdirec altc">
+		<img class="br5 mb10" src="/images/logo.jpg" alt="logo" width="80" height="80"/>
+		<div class="tc fz20 mb10 w60 h60 lh60 bg-yellow br5 fw600 colorf hide">实</div>
+		<h1 class="mb10">实验室设备预约APP</h1>
+		<div class="mt20" id="login-input">
+			<p class="mb10"><input class="fz16" type="text" name="account" placeholder="请输入学号或者工号" v-model="account"/></p>
+			<p class="mb10"><input class="fz16" type="password" name="password" placeholder="请输入密码" v-model="password"/></p>
+			<p class="mb5 mt20"><a class="displayb tc bg-yellow colorf lh40 h40" id="login-btn" href="javascript:void(0);" @click="login">登录</a></p>
+			<p class="mb10"><a class="fz12 text-gray" id="find-pw" href="javascript:void(0);">忘记密码</a></p>
+		</div>
+	</section>
+</div>
+<script type="text/javascript">
+	$(function(){
+		let vm = new Vue({
+			el:"#login-input",
+			data:{
+				//用户与密码
+				account:"",
+				password:""
+			},
+			methods:{
+				//登录验证
+				login(){
+					if(!this.account||!this.password){
+						layer.open({
+							content:"用户名和密码不能为空！",
+							skin: 'msg',
+							style:'background-color:#f91f0f;color:#fff;', //自定风格
+							time: 2 //2秒后自动关闭
+						});
+						return;
+					}
+					axios.post('../data/logincheck', {
+						account: this.account,
+						password: this.password
+					}).then(function (response) {
+						let data = response.data;
+						if(data.code ==200){
+							window.location.href = "index";
+						}else{
+							layer.open({
+								content:data.message,
+								skin: 'msg',
+								style:'background-color:#e1c10c;color:#fff;', //自定风格
+								time: 2 //2秒后自动关闭
+							});
+						}
+					}).catch(function (error) {
+						console.log(error);
+					});
+				}
+			}
+		});
+	});
+</script>

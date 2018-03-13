@@ -1,0 +1,131 @@
+<style>
+	.person-top{
+		height:160px;
+		background:url(/images/bg.jpg) no-repeat center;
+	}
+</style>
+<div class="container maxW640 bgw mauto h box-sizing-border borderw">
+	{{> header}}
+	<!--主体内容 start-->
+	<section class="content mt45 mb50 ohidden" id="content">
+		<section class="person-content bg-gray">
+			<div class="person-main">
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">姓名</span><span class="fz16">${info.name}<i class="ml5 iconfont icon-arrow1 hide"></i></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">学号/工号</span><span class="fz16">${info.account}<i class="ml5 iconfont icon-arrow1 hide"></i></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">用户类型</span><span class="fz16" v-if="info.type==1">学生<i class="ml5 iconfont icon-arrow1 hide"></i></span><span class="fz16" v-else-if="info.type==2">教师<i class="ml5 iconfont icon-arrow1 hide"></i></span><span class="fz16" v-else>未知<i class="ml5 iconfont icon-arrow1 hide"></i></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">性别</span><span class="fz16"><input class="borderNone tr w200" type="text" v-model="person_data.sex"></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">所读专业</span><span class="fz16"><input class="borderNone tr w200" type="text" v-model="person_data.major"></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">所在年级</span><span class="fz16"><input class="borderNone tr w200" type="text" v-model="person_data.grade"></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray mb30 bgw">
+					<span class="fz16">所在学院</span><span class="fz16"><input class="borderNone tr w200" type="text" v-model="person_data.academy"></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">绑定手机号</span><span class="fz16"><input class="borderNone tr w200" type="text" v-model="person_data.tel"></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">电子邮箱</span><span class="fz16"><input class="borderNone tr w200" type="text" v-model="person_data.email"></span>
+				</p>
+				<p class="displayf jscb pr5 pl5 pt10 pb10 borderb-gray bgw">
+					<span class="fz16">身份证号码</span><span class="fz16"><input class="borderNone tr w150" type="text" v-model="person_data.idcard"></span>
+				</p>
+			</div>
+			<div class="person-bottom mt30">
+				<a class="displayb h40 bg-yellow colorf tc lh40 fz15 letters5" href="javascript:void(0);" @touchstart="edit">提交修改</a>
+			</div>
+		</section>
+		{{> nav}}
+	</section>
+	<!--主体内容 end-->
+</div>
+<script type="text/javascript">
+	$(function(){
+		let vm = new Vue({
+			el:"#content",
+			// 更改Vue默认的插入纯文本的分隔符\{{}}，因为与后端handlebars的模板引擎的分隔符冲突了
+			delimiters:['${','}'],//改成ES6的字符串模板
+			data(){
+				return {
+					info:null,
+					person_data:{
+						sex:"",
+						major:"",
+						grade:"",
+						academy:"",
+						tel:"",
+						email:"",
+						idcard:"",
+					}
+				}
+			},
+			methods:{
+				// 个人信息
+				person_info(){
+					// axios模块请求数据
+					axios.get('../data/person').then(res=>{
+						console.log(res);
+						this.info = res.data.data;
+						// 处理数据
+						for(let key in this.person_data){
+							this.person_data[key] = res.data.data[key];
+							if(key == "sex"){
+								if(res.data.data[key]==1){
+									this.person_data[key] = "男";
+								}else if(res.data.data[key]==2){
+									this.person_data[key] = "女";
+								}else{
+									this.person_data[key] = "未知";
+								}
+							};
+						};
+					}).catch(error=>{
+						console.log(error);
+					});
+				},
+				// 个人信息编辑
+				edit(){
+					// 将性别进行转换成编码
+					if(this.person_data.sex == '男') this.person_data.sex = 1;
+					if(this.person_data.sex == '女') this.person_data.sex = 2;
+					axios.post('../data/person/edit',this.person_data).then(res=>{
+						if(res.data.code==200){
+							// 成功修改则重新解码成中文
+							if(this.person_data.sex == 1) this.person_data.sex = '男';
+							if(this.person_data.sex == 2) this.person_data.sex = '女';
+							layer.open({
+								content: res.data.message,
+								skin: 'msg',
+								style:"background:#e1c10c;",
+								time: 2 //2秒后自动关闭
+							});
+						}else{
+							layer.open({
+								content: res.data.message,
+								skin: 'msg',
+								style:"background:#e1c10c;",
+								time: 2 //2秒后自动关闭
+							});
+						}
+					}).catch(error=>{
+						console.log(error);
+					});
+				}
+			},
+			// 钩子函数，vue实例初始化并且相关程序在内存中编译完成，可以用于执行一些函数
+			mounted(){
+				this.person_info();
+			}
+		})
+	});
+</script>

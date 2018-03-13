@@ -1,0 +1,29 @@
+{
+  "name": "wzy_laboratory",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "supervisor ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "connect-multiparty": "^2.0.0",
+    "cookie-parser": "~1.4.3",
+    "cookie-session": "^2.0.0-beta.1",
+    "debug": "~2.2.0",
+    "express": "~4.14.0",
+    "express3-handlebars": "^0.5.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "mysql": "^2.13.0",
+    "serve-favicon": "~2.3.0"
+  },
+  "description": "this is my Graduation Project",
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [
+    "wzy"
+  ],
+  "author": "wzy",
+  "license": "ISC"
+}

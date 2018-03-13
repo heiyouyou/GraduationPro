@@ -1,0 +1,123 @@
+<div class="container maxW640 bgw mauto h box-sizing-border borderw">
+	{{> header}}
+	<!--主体内容 start-->
+	<section class="content mt45 mb50 ohidden" id="content">
+		<section class="patrbl10">
+			<ul>
+				<li class="mb10 borderb-yellow patb10" v-for="(v,i) in list_data">
+					<h4 class="mb5"><label><input class="icontp1 hide" type="checkbox" name="reservation" />设备名称：${v.name}</label></h4>
+					<div class="displayf">
+						<img :src="v.photo" alt="1" width="85" height="85" />
+						<div class="displayf flexdirec ml10">
+							<span>设备编号：${v.eqid}</span>
+							<span>所属实验室：${v.academy}</span>
+							<span class="hide">预约数量：<a class="color0 fz14 plus-btn" href="javascript:void(0);">+</a><span class="num mrl5">4</span><a class="color0 fz14 minus-btn" href="javascript:void(0);">-</a></span>
+							<p class="mt5">
+								<span class="delete-btn displayib curp tc mr5" :data-id="v.id" v-if="v.status==1" @touchstart="delete_data(v.id,v.eqid)">删除</span>
+								<span class="delete-btn displayib curp tc mr5" :style="{display:'none'}" :data-id="v.id" v-else>删除</span>
+								<span class="bgb displayib tc back-btn colorf ml5" v-if="v.status==2&&!v.backtime" @touchstart="back(v.id)">归还</span>
+								<span class="bgb displayib tc back-btn colorf ml5" :style="{display:'none'}" v-else>归还</span>
+								<span class="bg-yellow displayib tc status-btn" v-if="v.status==1">审批中</span>
+								<span class="bg-yellow displayib tc status-btn" :style="{color:'#000'}" v-else-if="v.status==2&&!v.backtime">已审批</span>
+								<span class="bg-yellow displayib tc status-btn" :style="{color:'#000'}" v-if="v.backstatus==1">已归还</span>
+								<span class="bg-yellow displayib tc status-btn" v-else-if="v.backstatus==0&&v.backtime">归还中</span>
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<div class="mt10 hide">
+				<a class="displayb h40 bg-yellow colorf tc lh40 fz15 letters5" id="reservation-btn" href="javascript:void(0);">预约</a>
+			</div>
+		</section>
+		{{> nav}}
+	</section>
+	<!--主体内容 end-->
+</div>
+<script type="text/javascript">
+	$(function(){
+		const vm = new Vue({
+			el:"#content",
+			delimiters:['${','}'],//改成ES6的字符串模板
+			data:{
+				list_data:[]
+			},
+			methods:{
+				// 预约详情列表
+				reservation_list(){
+					axios.get('../data/reservation/list').then(res=>{
+						this.list_data = res.data.data;
+					}).catch(error=>{
+						console.log(error);
+					});
+				},
+				// 取消预约
+				delete_data(id,eqid){
+					axios.get('../data/reservation/delete',{
+						params:{
+							id:id,
+							eqid:eqid
+						}
+					}).then(res=>{
+						console.log(res.data);
+						if(res.data.code==200){
+							this.reservation_list();
+							layer.open({
+								content: res.data.message,
+								skin: 'msg',
+								style:"background:#e1c10c;",
+								time: 2 //2秒后自动关闭
+							});
+						}else{
+							layer.open({
+								content: res.data.message,
+								skin: 'msg',
+								style:"background:#e1c10c;",
+								time: 2 //2秒后自动关闭
+							});
+						}
+					}).catch(error=>{
+						console.log(error);
+					});
+				},
+				// 归还操作
+				back(id){
+					let backtime = new Date().format("yyyy-MM-dd HH:mm:ss");
+					axios.get('../data/reservation/back',{
+						params:{
+							id:id,
+							backtime:backtime
+						}
+					}).then(res=>{
+						if(res.data.code==200){
+							this.reservation_list();
+							layer.open({
+								content: res.data.message,
+								skin: 'msg',
+								style:"background:#e1c10c;",
+								time: 2 //2秒后自动关闭
+							});
+						}else{
+							layer.open({
+								content: res.data.message,
+								skin: 'msg',
+								style:"background:#e1c10c;",
+								time: 2 //2秒后自动关闭
+							});
+						}
+					}).catch(error=>{
+						console.log(error);
+					});
+				}
+			},
+			mounted(){
+				this.reservation_list();
+				// 注意定时器里的this指向的是Window对象
+				setInterval(function(){
+					this.reservation_list();
+				}.bind(this),5000);
+			}
+			
+		});
+	});
+</script>

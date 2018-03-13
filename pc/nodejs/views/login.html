@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实验室设备管理系统</title>
+	<link rel="stylesheet" type="text/css" href="/css/base.css">
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="container">
+			<h1>实验室设备管理系统登录</h1>
+			<form class="form">
+				<input type="text" placeholder="请输入管理员账号" name="username" class="username">
+				<input type="password" placeholder="请输入管理员密码" name="password" class="password">
+				<!--<input type="Captcha" class="Captcha hide" name="randomPic"  placeholder="请输入验证码">
+				<img class="hide" src="getRandomPic?id='+Math.random()'" onClick="this.src='getRandomPic?id='+Math.random()" style="width:105px;margin:0 auto 10px auto">-->
+				<div><button type="submit" id="login-button">登录</button></div>
+			</form>
+		</div>
+		<ul class="bg-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<script type="text/javascript" src="/js/extends/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="/js/extends/layer/layer.js"></script> 
+	<script type="text/javascript">
+	$('#login-button').click(function(event){
+		event.preventDefault();
+	});
+	$(function(){
+		var user,pwd,Cap;
+		$(document).on("click","#login-button",function(){
+			user = $('.username').val();
+			pwd =$('.password').val();
+			// Cap = $('.Captcha').val();
+			if (user == '') {
+				layer.tips('账号为空','.username',{
+					tips: [2, '#c00'],
+				});
+				$('.username').focus();
+				return false;
+			};
+			if (pwd == '') {
+				layer.tips('密码为空', '.password',{
+					tips: [2, '#c00'],
+				});
+				$('.password').focus();
+				return false;
+			};
+			// if (Cap=='') {
+			//     layer.tips('验证码为空','.Captcha',{
+			//         tips: [2, '#c00'],
+			//     });
+			//     $('.Captcha').focus();
+			//     return false;
+			// };
+			$.ajax({
+				type: 'post',
+				url: 'logincheck',
+				dataType: 'json',
+				data: {
+					username:user,
+					password:pwd
+				},
+				timeout: 15000,
+				success: function(data) {
+					if(data.code==200){
+						window.location.href = 'device';
+					}else{
+						layer.msg(data.message,{shift:6,time:1000});
+					};    
+				}
+			});
+		});
+		document.onkeydown = function (event) {
+			if (event.keyCode == 13) {
+				$('#login-button').click();
+				return false;
+			};
+		};   
+	});
+	</script>
+</body>
+</html>

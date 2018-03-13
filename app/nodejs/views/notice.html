@@ -1,0 +1,70 @@
+<div class="container maxW640 bgw mauto h box-sizing-border borderw">
+	{{> header}}
+	<!--主体内容 start-->
+	<section class="content mt45 mb50 ohidden" id="content">
+		<section class="patrbl10">
+			<ul>
+				<li class="borderb-yellow pb5 mb15" v-for="(v,i) in list">
+					<h3>${v.title}<time class="fz12 ml5">${v.time}</time></h4>
+					<article class="mt5">
+					${v.content}
+					</article>
+				</li>
+			</ul>
+			<div class="bg-yellow"><a class="displayb tc lh35 colorf" id="more-btn" href="javascript:void(0);" @click="notice_list">${moreText}</a></div>
+		</section>
+		{{> nav}}
+	</section>
+	<!--主体内容 end-->
+</div>
+<script type="text/javascript">
+	$(function(){
+		let vm = new Vue({
+			el:"#content",
+			// 更改Vue默认的插入纯文本的分隔符\{{}}，因为与后端handlebars的模板引擎的分隔符冲突了
+			delimiters:['${','}'],//改成ES6的字符串模板
+			data(){
+				return {
+					list:[],
+					data_length:0,
+					// 分页的初始位置
+					start:0,
+					// 分页的长度
+					length:5,
+					// 更多加载判断
+					show:true,
+					moreText:"加载更多"
+				}
+			},
+			methods:{
+				notice_list(){
+					if(!this.show)return;
+					axios.get('../data/notice/list',{
+							params:{
+								start:this.start,
+								length:this.length
+							}
+						}
+					).then(res=>{
+						this.data_length = res.data.data.length;
+						this.list = this.list.concat(res.data.data);
+						this.start +=  this.length;
+						// 如果请求的数据为空或者请求的数据少于指定长度，则进行相关操作 
+						if(this.data_length==0||this.length>this.data_length){
+							this.show = false;
+							this.moreText = "无数据可以查看"
+						}else{
+							this.show = true;
+							this.moreText = "加载更多"
+						}
+					}).catch(error=>{
+						console.log(error);
+					});
+				}
+			},
+			mounted(){
+				this.notice_list();
+			}
+		});
+	});
+</script>

@@ -1,0 +1,6 @@
+{
+	"status":{"code":200,"message":"请求成功"},
+	"aaData":[{"id":1,"type":1,"name":"张三","password":"122343","phone":"13556323433","head_pic":"xxxx.jpg"},{"id":2,"type":2,"name":"张三","password":"122343","phone":"13556323433","head_pic":"xxxx.jpg"},{"id":3,"type":2,"name":"张三","password":"122343","phone":"13556323433","head_pic":"xxxx.jpg"},{"id":4,"type":2,"name":"张三","password":"122343","phone":"13556323433","head_pic":"xxxx.jpg"},{"id":1,"type":1,"name":"张三","password":"122343","phone":"13556323433","head_pic":"xxxx.jpg"},{"id":5,"type":2,"name":"张三","password":"122343","phone":"13556323433","head_pic":"xxxx.jpg"}],"iTotalRecords":5,
+	"iTotalDisplayRecords":5,
+	"sEcho":1
+}

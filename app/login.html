@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>实验室设备预约APP</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <style>
+    	.login-box input{
+    		border:none;
+    		border-bottom:2px solid #e1c10c;
+    		color:#e1c10c;
+    		padding:4px 0;
+    		width:200px;
+    	}
+    	#login-btn{
+    		width:200px;
+    	}
+    	#find-pw:hover{
+    		color:#e1c10c;
+    	}
+    </style>
+</head>
+<body>
+	<div class="container maxW640 bgw mauto h displayf altc jscc">
+		<section class="login-box displayf flexdirec altc">
+			<img class="br5 mb10" src="images/logo.jpg" alt="logo" width="70" height="70"/>
+			<h1 class="mb10">实验室设备预约APP</h1>
+			<div class="mt20" id="login-input">
+				<p class="mb10"><input class="fz16" type="text" name="account" placeholder="请输入学号或者工号" v-model="username"/></p>
+				<p class="mb10"><input class="fz16" type="password" name="password" placeholder="请输入密码" v-model="password"/></p>
+				<p class="mb5 mt20"><a class="displayb tc bg-yellow colorf lh40 h40" id="login-btn" href="index.html" @click="login">登录</a></p>
+				<p class="mb10"><a class="fz12 text-gray" id="find-pw" href="javascript:void(0);">忘记密码</a></p>
+			</div>
+		</section>
+	</div>
+	<script type="text/javascript" src="js/extends/jquery.min.js"></script>
+	<script type="text/javascript" src="js/extends/vue.js"></script>
+	<script type="text/javascript" src="js/extends/layer_mobile/layer.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+			let vm = new Vue({
+				el:"#login-input",
+				data:{
+					//用户与密码
+					username:"",
+					password:""
+				},
+				methods:{
+					//登录验证
+					login(){
+						layer.open({
+						    content:"账号或者密码错误！",
+						    skin: 'msg',
+						    style:'background-color:#e1c10c;color:#fff;', //自定风格
+						    time: 2 //2秒后自动关闭
+					  	});
+					}
+				}
+			});
+    	});
+    </script>
+</body>
+</html>
